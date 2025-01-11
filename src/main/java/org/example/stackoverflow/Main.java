@@ -11,6 +11,7 @@ public class Main {
 //        var factory = new JsonFactory();
         var factory = new ChunkJsonFactory();
         try (var parser = factory.createParser(new FileReader("src/main/resources/sample-json.json"))) {
+//        try (var parser = factory.createParser(new FileReader("src/main/resources/big-json.json"))) {
             while (parser.nextToken() != null) {
                 if (parser.getCurrentToken().isScalarValue()) {
 //                    System.out.println(parser.getText());
@@ -19,7 +20,9 @@ public class Main {
 //                    parser.readBinaryValue(Base64Variants.MIME, jsonOutputStream);
 //                    System.out.println(jsonOutputStream.getCount());
                     Writer writer = new OutputStreamWriter(new BufferedOutputStream(System.out), "UTF-8");
-                    parser.getText(writer);
+                    var writtenOut = parser.getText(writer);
+                    System.out.println("\n");
+                    System.out.println(writtenOut);
                     writer.flush();
                     break;
                 }

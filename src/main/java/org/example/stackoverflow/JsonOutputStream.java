@@ -9,7 +9,7 @@ import java.util.Base64;
 
 public class JsonOutputStream extends OutputStream {
     private final ByteArrayOutputStream buffer = new ByteArrayOutputStream(4);
-    private final Base64.Decoder decoder = Base64.getMimeDecoder();
+    private final Base64.Encoder encoder = Base64.getMimeEncoder();
 
     @Getter
     private int count = 0;
@@ -26,9 +26,9 @@ public class JsonOutputStream extends OutputStream {
         count = 0;
     }
 
-    private void flushBuffer()  {
+    private void flushBuffer() {
         if (buffer.size() < 4) return; // Only decode full Base64 chunks
-        byte[] decoded = decoder.decode(buffer.toByteArray());
+        byte[] encoded = encoder.encode(buffer.toByteArray());
         buffer.reset();
     }
 }
