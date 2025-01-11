@@ -9,12 +9,12 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 
 
-public class Main {
+public class JsonParserMain {
     public static void main(String[] args) throws Exception {
 //        var factory = new JsonFactory();
         var factory = new ChunkJsonFactory();
-//        try (var parser = factory.createParser(new FileReader("src/main/resources/sample-json.json"))) {
-        try (var parser = factory.createParser(new FileReader("src/main/resources/big-json.json"))) {
+//        try (var parser = factory.createParser(new FileReader(Config.SAMPLE_JSON))) {
+        try (var parser = factory.createParser(new FileReader(Config.BIG_JSON))) {
             while (parser.nextToken() != null) {
                 if (parser.getCurrentToken().isScalarValue()) {
 //                    readBinaryValue(parser);
